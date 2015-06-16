@@ -1,0 +1,36 @@
+<div class="container">
+	<div class="row" >
+		<div class="col-md-5 col-xs-12 ">
+			<img ng-src="image/home.png" alt="..." class="img-rounded" style="height: 100px">
+		</div>
+		<div class="col-md-7 col-xs-12" style="margin-top: 30px">
+			<form >
+				<div class="form-group col-xs-8">
+					<input type="text" class="form-control" placeholder="请输入关键词"/>
+				</div>
+				<div class="form-group col-xs-4">
+					<span class="btn btn-info btn-md" role="button" title="搜索">搜索<span class="glyphicon glyphicon-search"></span></span>
+				</div>
+			</form>
+		</div>
+	</div>
+	<hr>
+<div class="row " style="margin-top: 20px">
+	<div class="col-md-6 col-md-offset-3  text-center">
+		<span class="col-md-3 col-xs-6 btn btn-danger my-a" ui-sref="myRentle({myRentleId:0})" ng-class="{active: currentChoice == 0}">出租房屋</span>
+		<span class="col-md-3 col-xs-6 btn btn-danger my-a" ui-sref="myRentle({myRentleId:1})" ng-class="{active: currentChoice == 1}" >个人中心</span>
+		<span class="col-md-3 col-xs-6 btn btn-danger my-a" ui-sref="myRentle({myRentleId:2})" ng-class="{active: currentChoice == 2}" >信息中心</span>
+		<span class="col-md-3 col-xs-6 btn btn-danger my-a"  ng-class="{active: currentChoice == 3}">娱乐服务</span>
+	</div>
+</div>
+<div class="row " style="margin-top: 20px;">
+	<div class="col-md-3 panel panel-default text-center">
+		<div ui-view="totalItems"></div>
+	</div>
+	<div class="col-md-9">
+			<div ui-view="detailItemsShow">
+				
+			</div>
+	</div>
+</div>
+</div>

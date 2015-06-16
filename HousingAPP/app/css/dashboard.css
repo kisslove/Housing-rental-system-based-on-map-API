@@ -1,0 +1,180 @@
+
+/**
+ * map show or none
+ */
+.hidden{
+  display: none;
+}
+/**
+ * 商品列表样式
+ */
+.thumbnail img {
+  height: 150px;
+}
+
+.thumbnail .items-details {
+  height: 3em;
+  overflow-y: auto;
+}
+/**
+ * 分页
+ */
+
+.pagination-sm {
+  margin: 0;
+}
+
+.closeSpan {
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1;
+  color: red;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.notes{color: red;}
+
+.select1 
+ {  
+
+   width: 98px; 
+   height: 29px; 
+   overflow: hidden; /*隐藏了小三角，因为宽度为110px,而select宽度为130px*/
+   display:block; 
+
+} 
+ .select2{ 
+  margin-top: 10px;
+    border: 0px; 
+    width:98px; 
+    display:block; 
+    height: 29px; 
+    overflow:hidden; 
+    } 
+ .selectChange 
+    { 
+      FONT-SIZE: 13px; 
+      position: relative; 
+      left: -2px; 
+      top: -2px; 
+      width: 130px; 
+      color: #0988fe; 
+        background-color:transparent;
+        opacity: 0.8;
+    } 
+
+.myDropDown{
+ margin-right:30px;
+ width: 60px;
+
+}
+    
+
+
+.up{
+  position:fixed;
+  bottom:20px;
+  right:10px;
+  width:20px;
+  height: 50px;
+  background:url('/image/rocketUp.png'); no-repeat 0px 5px;
+  display:none;
+  }
+
+.choiceCondition
+{
+  font-size: 15px;
+            font-weight: bold;
+            line-height: 1;
+            color: red;
+            text-shadow: 0 1px 0 #ffffff;
+            opacity: 0.7;
+            cursor: pointer;
+}
+/*添加自定义媒体查询样式*/
+@media (max-width: 767px) {
+    .my-hidden-xs {
+        display: none !important;
+    }
+}
+
+
+.panel-body a:hover
+{
+   cursor: pointer;
+   font-size: 15px;
+   border-radius:15px;
+
+}
+.panel-body a:active
+{
+   color: white;
+   background-color:#3D3D3A;
+   font-size: 15px;
+   border-radius:15px;
+}
+.list-group .my-a:hover
+  {
+   cursor: pointer;
+   font-size: 16px;
+   border-radius:15px;
+}
+.list-group .my-a:active
+{
+   color: white;
+   background-color:#3D3D3A;
+   font-size: 15px;
+   border-radius:15px;
+}
+
+.my-a:hover
+  {
+   cursor: pointer;
+   font-size: 18px;
+   border-radius:15px;
+}
+.my-a:active
+{
+   color: white;
+   background-color:#3D3D3A;
+   font-size: 15px;
+   border-radius:15px;
+}
+.my-title{
+  background-color: #3399FF;
+  color: white;
+  border-radius: 10px;
+}
+
+.my-title-1{
+  color: #EAF7EC;
+}
+.panel-collapse .panel-body{
+  text-align: center;
+  font-size: 16px;
+  font-family: italic;
+  font-weight: solid;
+}
+
+.panel-collapse .panel-body a:hover
+  {
+   cursor: pointer;
+    background-color:#E1E1E1;
+   font-size: 17px;
+   border-radius:10px;
+}
+.panel-collapse .panel-body a:active
+{
+   color: white;
+   font-size: 16px;
+}
+
+.my-showList:hover{
+  background-color:#4C4C4C;
+  opacity: 0.5;
+
+
+}
+

@@ -1,0 +1,88 @@
+<div class="panel panel-default col-md-12" ng-controller="updatePersonalInfoCtrl">
+	<h3><span class="my-title">修改资料</span></h3>
+	<div class="panel-body">
+		<form class="form-horizontal panel panel-default" role="form" id="updateInfoForm" style="margin-top: 20px;" name="updateInfoForm" ng-submit="updatePersonalInfo()" >
+			<div class="panel-body">
+			    <div class="form-group col-md-12 row">
+					<label  class="col-md-2 control-label">头像</label>
+					<div class="col-md-10">
+						<div class="col-md-4 col-xs-12">
+							<img ng-hide="files[0].dataUrl != null" ng-src="./image/{{headImage}}" alt="{{item.label}}" class="img-circle" style="height: 100px">
+							 <img ng-show="files[0].dataUrl != null" ng-src="{{files[0].dataUrl}}" class="img-circle" style="height: 100px">
+						</div>
+
+						<div class="col-md-8 col-xs-12" style="margin-top: 10px">
+						    修改头像：
+							<input type="file" ng-file-select name="thumbnail" ng-model="files" accept="image/*"  ng-file-change="uploadPic(files)">
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-12 row">
+					<label  class="col-md-2 control-label">用户名</label>
+					<div class="col-md-2">
+						<label class="btn btn-link control-label"  ng-bind="user.email"></label>
+					</div>
+				</div>
+				<div class="form-group col-md-12 row">
+					<label  class="col-md-2 control-label">电话号码</label>
+					<div class="col-md-3">
+						<input type="text" class="form-control" name='hostphone' ng-model='user.hostphone' maxlength="11" minlength="11"></div>
+				</div>
+				<div class="form-group col-md-12 row">
+					<label  class="col-md-2 control-label">真实姓名</label>
+					<div class="col-md-3">
+						<input type="text" class="form-control" name='realname' ng-model='user.realname' maxlength="5"></div>
+				</div>
+				<div class="form-group col-md-12 row">
+				<label  class="col-md-2 col-xs-12 control-label">性别</label>
+					<label class="col-md-1 col-xs-6 control-label">
+						<input type="radio" name="myTestRadio" ng-model="user.sex" value="男"/>男
+					</label>
+					<label class="col-md-1 col-xs-6 control-label">
+						<input type="radio" name="myTestRadio" ng-model="user.sex" value="女"/>女
+					</label>
+				</div>
+
+				<div class="form-group col-md-12">
+					<label  class="col-md-2 control-label">密码</label>
+					<div class="col-md-3">
+						已设置
+						<label class="btn btn-link control-label" ui-sref="registerUserHome.personalCenter.updatePassword">修改<span class="glyphicon glyphicon-edit"></span></label>
+					</div>
+ 
+				</div>
+
+				<div class="form-group col-md-12">
+					<label class="col-md-2 control-label">家乡</label>
+					<div class="col-md-2">
+						<select class="form-control"  style="width: 125px" ng-model='user.hometown'>
+							<option value="">--选择城市--</option>
+							<option value="{{city.name}}" ng-repeat="city in cities">{{city.name}}</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="form-group col-md-12">
+					<label class="col-md-2 control-label">通讯地址</label>
+					<div class="col-md-3">
+						<input type="text" class="form-control" name='contactAddr' ng-model='user.contactAddr' maxlength="100"></div>
+				</div>
+
+				<div class="form-group col-md-12">
+					<label class="col-md-2 control-label">邮编</label>
+					<div class="col-md-3">
+						<input type="tel" class="form-control" placeholder="请输入邮编" name="postcode" ng-model='user.postcode' maxlength="6" minlength="6" ></div>
+				</div>
+				<div class="form-group col-md-12">
+					<label class="col-md-2 control-label">个性签名</label>
+					<div class="col-md-5">
+						<textarea class="form-control" rows="3" name="signature" ng-model='user.signature' placeholder="请输入小于50字" maxlength="50"></textarea>
+					</div>
+				</div>
+				<div class="form-group col-md-12">
+					<button type="submit" class="btn-success col-xs-8 col-xs-offset-2 col-md-3 col-md-offset-9 btn btn-lgk" >提交修改<span class="glyphicon glyphicon-saved"></span></button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

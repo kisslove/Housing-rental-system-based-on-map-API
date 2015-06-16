@@ -1,0 +1,238 @@
+<div class="col-md-12 panel panel-default" ng-controller="rentForBedCtrl">
+<h3><span class="my-title">&nbsp;床位出租</span></h3>
+	<form class="form-horizontal " role="form" id="bedForm" style="margin-top: 20px;" name="BedForm" ng-submit="handInBed(BedForm.$valid)">
+		<div class="form-group col-md-12 row">
+			<label  class="col-md-2 col-xs-12 control-label">小区地址</label>
+			<div class="col-md-4 col-xs-12" ng-class="{'has-error':BedForm.communityName.$dirty&&BedForm.communityName.$invalid}">
+				<input type="text" class="form-control" name="communityName" ng-model="communityName" placeholder="地址提交后不能修改" required maxlength="30"></div>
+			<div class="col-xs-12 col-md-2">
+				<a class="btn btn-link" ng-click="showMap()" onclick="showMap()">地图选址</a>
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">出租间</label>
+			<div class="col-md-2">
+				<select class="form-control" style="width: 125px" ng-model="gender">
+					<option value="">--性别要求--</option>
+					<option>限女生</option>
+					<option>限男生</option>
+					<option>男女不限</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">租金</label>
+			<div class="col-md-2">
+				<select class="form-control" style="width: 125px" ng-model='zujinMethod'>
+					<option value="">--租金方式--</option>
+					<option>押一付三</option>
+					<option>押一付二</option>
+					<option>押二付一</option>
+					<option>押二付二</option>
+					<option>押三付三</option>
+				</select>
+			</div>
+	<div class="hidden-md hidden-sm hidden-lg">&nbsp;</div>
+			<div class="col-md-2 col-xs-7" ng-class="{'has-error':BedForm.yuezu.$dirty&&BedForm.yuezu.$invalid}">
+				<input type="text" class="form-control col-md-2" style="height: 35px" name="yuezu" ng-model="price" required maxlength="10"></div>
+			<label class="col-md-1 col-xs-4 control-label">元/月</label>
+
+		</div>
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">房屋配置</label>
+			<div class="col-md-10">
+				<div class="checkbox col-md-2">
+					<label>
+						<input type="checkbox" ng-model="chuang">床</label>
+				</div>
+				<div class="checkbox col-md-2">
+					<label>
+						<input type="checkbox" ng-model="yigui">衣柜</label>
+				</div>
+				<div class="checkbox  col-md-2">
+					<label>
+						<input type="checkbox" ng-model="shafa">沙发</label>
+				</div>
+				<div class="checkbox  col-md-2">
+					<label>
+						<input type="checkbox" ng-model="dianshi">电视</label>
+				</div>
+				<div class="checkbox  col-md-2">
+					<label>
+						<input type="checkbox" ng-model="bingxiang">冰箱</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<div class="col-md-10 col-md-offset-2">
+				<div class="checkbox col-md-2">
+					<label>
+						<input type="checkbox" ng-model="xiyiji">洗衣机</label>
+				</div>
+				<div class="checkbox col-md-2">
+					<label>
+						<input type="checkbox"ng-model="kongtiao">空调</label>
+				</div>
+				<div class="checkbox  col-md-2">
+					<label>
+						<input type="checkbox"ng-model="reshuiqi">热水器</label>
+				</div>
+				<div class="checkbox  col-md-2">
+					<label>
+						<input type="checkbox"ng-model="kuandai">宽带</label>
+				</div>
+				<div class="checkbox  col-md-2">
+					<label>
+						<input type="checkbox"ng-model="nuanqi">暖气</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">标题</label>
+			<div class="col-md-5" ng-class="{'has-error':BedForm.title.$dirty&&BedForm.title.$invalid}">
+				<input type="text" class="form-control" placeholder="请输入小于15个汉字" name='title' ng-model='title' maxlength="15" required></div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">房间描述</label>
+			<div class="col-md-5" ng-class="{'has-error':BedForm.describle.$dirty&&BedForm.describle.$invalid}">
+				<textarea class="form-control" rows="3" name="describle" ng-model='describle' required placeholder="请输入小于100字" maxlength="100"></textarea>
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">上传图片</label>
+			<div class="col-md-10">
+				<input type="file" ng-file-select name="thumbnail" ng-model="files" multiple="multiple" accept="image/*">
+				<span class="progress" ng-show="progress >= 0">
+					<div ng-class="{progress: true}">
+						<div ng-class="['progress-bar', progress-bar-success]" ng-style="{width: progress + '%'}">
+							<div>{{progress}}%</div>
+						</div>
+					</div>
+				</span>
+				<span ng-show="result">Upload Successful</span>
+				<span ng-show="errorMsg">Upload failed</span>
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">联系人</label>
+			<div class="col-md-3" ng-class="{'has-error':BedForm.hostname.$dirty&&BedForm.hostname.$invalid}">
+				<input type="text" class="form-control" name='hostname' ng-model='hostname' required maxlength="4"></div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">联系电话</label>
+			<div class="col-md-3" ng-class="{'has-error':BedForm.hostphone.$dirty&&BedForm.hostphone.$invalid}">
+				<input type="tel" class="form-control" placeholder="请输入11位手机号" name="hostphone" ng-model='hostphone' maxlength="11" minlength="11" required></div>
+		</div>
+		<div class="form-group col-md-12">
+			<button type="submit" class="btn btn-success  btn-lg col-xs-offset-2 col-md-offset-10" ng-disabled="BedForm.$invalid">确认并提交<span class="glyphicon glyphicon-saved"></span></button>
+		</div>
+	</form>
+	<div class="col-md-12 hidden col-xs-12" id="mapDiv">
+		<div class="col-md-12 col-xs-12">
+			<form class="navbar-form" >
+				<div class="col-md-3 col-xs-12">
+					<select class="form-control" ng-model="vm.value" ng-change="cityChange2()">
+						<option value="">选择城市</option>
+						<optgroup ng-repeat="province in vm.provinces" label="{{province.label}}">
+							<option ng-repeat="city in province.cities" value="{{city.label}}">{{city.label}}
+							</option>
+						</optgroup>
+					</select>
+				</div>
+				<div class="hidden-md hidden-sm hidden-lg">&nbsp;</div>
+				<div class="col-md-3 col-xs-12">
+					<select class="form-control" ng-model="specialArea.value" ng-change="areaChange2()">
+					   <option value="">选择区域</option>
+						<option ng-repeat="area in areas2" value="{{area.name}}">
+						{{area.name}}
+						</option>
+					</select>
+				</div>
+				<div class="hidden-md hidden-sm hidden-lg">&nbsp;</div>
+				<div class="col-md-5 col-xs-12">
+                     <input type="text" class="form-control" placeholder="请在地图上选择或者输入你的位置" ng-model="myAddress" id="myAddressId">
+				</div>
+				<div class="hidden-md hidden-sm hidden-lg">&nbsp;</div>
+				<div class="col-md-1 col-xs-12">
+					<span class="btn btn-success" ng-click="closeMap()">确定<span class="glyphicon glyphicon-saved"></span></span>
+				</div>
+			</form>	
+		</div>
+		<hr/>
+		<div class="col-md-12 panel-body">
+		    <div class="col-md-6 col-xs-12" style="height: 400px" id="normal_map">
+  
+           </div>
+			<div class="col-md-6 col-xs-12" style="height: 400px" id="panorama">
+ 
+           </div>
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+     var supperMap;//定义一个全局的地图实例
+     var supperPanorama;
+	//百度地图API功能
+	function loadJScript() {
+		var script = document.createElement("script");
+		script.type = "text/javascript";
+		script.src = "http://api.map.baidu.com/api?v=2.0&ak=E1YbVFg2KPSaKPgUgtz3syD4&callback=init";
+		document.body.appendChild(script);
+	}
+	function init() {
+
+      var mapOption = {
+			mapType: BMAP_NORMAL_MAP,
+			maxZoom: 18,
+			drawMargin:0,
+			enableFulltimeSpotClick: true,
+			enableHighResolution:true
+		}
+      // 创建Map实例
+	  var map = new BMap.Map("normal_map",mapOption);      
+	  map.centerAndZoom("北京市", 11);
+	  supperMap=map;
+      map.enableScrollWheelZoom(true);
+      // 添加带有定位的导航控件
+      var navigationControl = new BMap.NavigationControl({
+      // 靠左上角位置
+      anchor: BMAP_ANCHOR_TOP_LEFT,
+     // LARGE类型
+      type: BMAP_NAVIGATION_CONTROL_LARGE,
+      // 启用显示定位
+       enableGeolocation: true
+     });
+     map.addControl(navigationControl);
+     // 添加定位控件
+     var geolocationControl = new BMap.GeolocationControl();
+     geolocationControl.addEventListener("locationSuccess", function(e){
+    // 定位成功事件
+    var address = '';
+    address += e.addressComponent.province;
+    address += e.addressComponent.city;
+    address += e.addressComponent.district;
+    address += e.addressComponent.street;
+    address += e.addressComponent.streetNumber;
+    alert("当前定位地址为：" + address);
+  });
+  geolocationControl.addEventListener("locationError",function(e){
+    // 定位失败事件
+    alert(e.message);
+  });
+  map.addControl(geolocationControl);              //启用滚轮放大缩小
+
+   //创建街景实例
+   var panorama = new BMap.Panorama('panorama');
+   supperPanorama=panorama;
+	}
+    showMap= loadJScript;  //异步加载地图
+</script>

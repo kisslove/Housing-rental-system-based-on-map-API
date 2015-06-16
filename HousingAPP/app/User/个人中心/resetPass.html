@@ -1,0 +1,28 @@
+<div class="col-md-12 container" ng-controller="resetPassCtrl">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<form name="resetPassForm" ng-submit="resetPassword()">
+			<div class="col-md-12">
+			<label class="form-label">重置密码</label>
+		</div>
+		<div class="col-md-12">
+			<h3>输入新密码：</h3>
+		</div>
+		<div class="col-md-9 col-md-offset-3">
+			<input type="password" class="form-control" ng-model="newPass" required placeholder="新密码"></div>
+			<div class="col-md-9 col-md-offset-3" style="margin-top: 10px">
+			<input type="password" class="form-control" ng-model="againPass" required placeholder="重复密码"></div>
+       <div class="col-md-12">
+       	 <span class="notes" ng-bind="errorMsg2" ng-show="errorMsg2!=''"></span>
+       	 <a ui-sref="home" ng-show="errorMsg2=='修改成功!'">返回首页</a>
+       </div>
+		<div class="col-md-2 col-md-offset-10 col-xs-12" style="margin-top: 20px">
+			<button class="btn btn-md btn-success" type="submit">
+				确认
+				<span class="glyphicon glyphicon-saved"></span>
+			</button>
+		</div>
+		</form>
+			</div>
+		</div>
+	</div>

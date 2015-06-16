@@ -1,0 +1,123 @@
+<div class="container" ng-controller="detailPageCtrl">	
+  <div class="col-md-10 col-md-offset-1 col-xs-12">
+    <div class="panel panel-default">
+    <div class="col-md-12 panel-heading">
+      <div class="col-md-12">
+          <h3 ng-bind="item.describle"></h3>({{item.rentleType}})
+      </div>
+    </div>
+    <div class="col-md-12 panel-body">
+      <div class="col-md-12 col-xs-12">
+        <div class="col-md-5 col-xs-12">
+          <h5>房源编号：{{item._id}}</h5>
+        </div>
+        <div class="col-md-5 col-xs-12">
+          <h5>发布日期：{{item.datetime}}</h5>
+        </div>
+      </div>
+      <div id="carousel-example-generic" class="carousel slide col-md-5 panel panel-default" data-ride="carousel" style="margin-top: 10px">
+        <!-- Indicators -->
+        <ol class="carousel-indicators" >
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active ng-binding ng-scope"></li>
+          <li data-target="#carousel-example-generic" ng-repeat="imgL in img" data-slide-to="{{imgL.name}}"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <img style="height:270px" ng-src="../image/{{item.thumbnail[0].imageName}}" alt="...">
+            <div class="carousel-caption"></div>
+          </div>
+          <div class="item " ng-repeat="img in images">
+            <img style="height:270px" ng-src="../image/{{img.imageName}}" alt="...">
+            <div class="carousel-caption"></div>
+          </div>
+        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" ui-sref='#' href="#carousel-example-generic" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" ui-sref='#' href="#carousel-example-generic" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+      <div class="col-md-7" ui-view="detailPage">
+           <div class="col-md-12" style="background: gray"></div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+ <div class="col-xs-12 col-md-10 col-md-offset-1">
+   <div class="panel panel-default">
+   <div class="col-md-12 panel-heading">
+     <div class="col-md-12">
+       <h3>房源描述</h3>
+     </div>
+   </div>
+
+   <div class="col-md-12 panel-body">
+    <div class="col-md-12">
+       <div class="panel panel-default">
+        <div class="col-md-12 panel-body">
+          <div class="col-md-12">
+            <h4>房间配置：</h4>
+          </div>
+            <div class="col-md-10 col-md-offset-1">
+              <div ng-bind="item.roomThing" ng-show="item.roomThing"></div>
+            <div ng-show="!item.roomThing">
+             电话咨询
+           </div>
+            </div>
+        </div>
+     </div>
+    </div>
+
+     <div class="col-md-12 col-xs-12" ng-show="item.imageName!=='default.jpg'" ng-repeat="item in item.thumbnail">
+       <img ng-src="../image/{{item.imageName}}" class="col-xs-12 col-md-12" style="height:450px"> 
+       <hr/> 
+     </div>
+   </div>
+ </div>
+ </div >
+ 
+  
+
+<div class="col-xs-12 col-md-10 col-md-offset-1">
+   <div class="panel panel-default">
+   <div class="col-md-12 panel-heading">
+     <div class="col-md-12 row">
+       <div class="col-md-3 col-xs-12"><h3>地图/街景</h3></div>
+       <div class="col-md-3 col-xs-12" style="margin-top: 17px">
+        <select class="form-control" ng-model="POIKind" ng-change="POIKindChange()">
+         <option value="">查询周围POI</option>
+        <option value="0">无(隐藏所有POI)</option>
+        <option value="1">酒店</option>
+        <option value="2">餐饮</option>
+        <option value="3">电影院</option>
+        <option value="4">公交站点</option>
+        <option value="5">室内景点</option>
+      </select>
+       </div>
+     </div>
+   </div>
+
+   <div class="col-md-12 panel-body">
+
+     <div class="col-md-7 col-xs-12" style="height: 400px" id="panorama">
+ 
+     </div>
+      <div class="col-md-5 col-xs-15" style="height: 400px" id="normal_map">
+ 
+     </div>
+   </div>
+ </div>
+ </div >
+
+ 
+
+
+</div>
+

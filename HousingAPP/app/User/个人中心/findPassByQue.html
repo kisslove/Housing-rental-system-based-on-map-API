@@ -1,0 +1,77 @@
+<div class="col-md-8 col-md-offset-2 col-xs-12" ng-controller="findPassByQueCtrl">
+	<div ng-class="{progress: true, 'progress-striped': vm.striped}" style="margin-top: 20px">
+    <div ng-class="['progress-bar', 'progress-bar-info']" 
+    ng-style="{width: vm.value + '%'}">
+			<div ng-if="vm.showLabel">{{vm.value}}%</div>
+		</div>
+	</div>
+	<div class="col-md-12" ng-hide="step!=1">
+		<div class="col-md-12">
+			<label class="form-label">第一步</label>
+		</div>
+		<div class="col-md-12 col-xs-12">
+			<h3>请输入用户名：</h3>
+		</div>
+		<div class="col-md-8 col-md-offset-3">
+			<input type="email" class="form-control" placeholder="注册邮箱" ng-model="user.username">
+			<span class="notes" ng-bind="errorMsg" ng-show="errorMsg!=''"></span>
+			</div>
+
+		<div class="col-md-3 col-md-offset-9 col-xs-12" style="margin-top: 20px">
+			<button class="btn btn-md btn-success" ng-click="checkUsername()">
+				下一步
+				<span class="glyphicon glyphicon-forward"></span>
+			</button>
+		</div>
+	</div>
+	<div class="col-md-12" ng-hide="step!=2">
+		<div class="col-md-12">
+			<label class="form-label">第二步</label>
+		</div>
+		<div class="col-md-12">
+			<h3>选择密保问题：</h3>
+		</div>
+        <div class="col-md-3 col-md-offset-2 col-xs-12">
+        	<select class="form-control" ng-model="choiceQue">
+						<option value="">--选择问题--</option>
+			<option ng-repeat="que in questions" value="{{que.question}}">{{que.question}}</option>
+
+					</select>
+        </div>
+		<div class="col-md-6 col-xs-12">
+			<input type="text" class="form-control" ng-model="userAnswer" placeholder="请输入答案">
+         <span class="notes" ng-bind="errorMsg1" ng-show="errorMsg1!=''"></span>
+			</div>
+
+		<div class="col-md-3 col-md-offset-9 col-xs-12" style="margin-top: 20px">
+			<button class="btn btn-md btn-success" ng-click="checkAnswer()">
+				下一步
+				<span class="glyphicon glyphicon-forward"></span>
+			</button>
+		</div>
+	</div>
+	<div class="col-md-12" ng-hide="step!=3">
+		<form name="updateForm" ng-submit="updatePassword()">
+			<div class="col-md-12">
+			<label class="form-label">第三步</label>
+		</div>
+		<div class="col-md-12">
+			<h3>输入新密码：</h3>
+		</div>
+		<div class="col-md-9 col-md-offset-3">
+			<input type="password" class="form-control" ng-model="newPass" required placeholder="新密码"></div>
+			<div class="col-md-9 col-md-offset-3" style="margin-top: 10px">
+			<input type="password" class="form-control" ng-model="againPass" required placeholder="重复密码"></div>
+       <div class="col-md-12">
+       	 <span class="notes" ng-bind="errorMsg2" ng-show="errorMsg2!=''"></span>
+       	 <a ui-sref="home" ng-show="errorMsg2=='修改成功!'">返回首页</a>
+       </div>
+		<div class="col-md-2 col-md-offset-10 col-xs-12" style="margin-top: 20px">
+			<button class="btn btn-md btn-success" type="submit">
+				确认
+				<span class="glyphicon glyphicon-saved"></span>
+			</button>
+		</div>
+		</form>
+	</div>
+</div>

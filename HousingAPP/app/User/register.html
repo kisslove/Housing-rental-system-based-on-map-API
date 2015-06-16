@@ -1,0 +1,54 @@
+
+<div class="container" ng-controller="userRegisterCtrl">
+
+	<form class="form-signin" role="form" name="registerForm" ng-submit="register(registerForm.$valid)" novalidate>
+	<h3 class="form-signin-heading"><span class="glyphicon glyphicon-hand-right"></span>欢迎加入我们</h3>
+		<div ng-class="{'has-error':registerForm.email.$dirty&&registerForm.email.$invalid}" class="row">
+			<div class="col-xs-12">
+				<input type="email" class="form-control" name="email" placeholder="邮箱地址"  ng-model="user.email" required autofocus="" ng-blur="unique()">
+				<span ng-bind="uniqueName" class="notes"></span>
+				<span ng-messages="registerForm.email.$error" class="notes">
+					<span ng-message="required">*必填项</span>
+					<span ng-message="email">*请填写正确邮箱地址</span>
+
+				</span>
+			</div>
+		</div>
+		<label></label>
+
+		<div ng-class="{'has-error':registerForm.password.$dirty&&registerForm.password.$invalid}" class="row">
+			<div class="col-xs-12">
+				<input type="password" class="form-control" name="password" placeholder="密码" ng-model="user.password" required>
+				<span ng-messages="registerForm.password.$error" class="notes">
+					<span ng-message="required">*必填项</span>
+				</span>
+			</div>
+		</div>
+
+		<label></label>
+		<div ng-class="{'has-error':registerForm.againPass.$dirty&&registerForm.againPass.$invalid}" class="row">
+			<div class="col-xs-12">
+				<input type="password" class="form-control" name="againPass" ng-model="user.againPass" placeholder="确认密码" required ng-blur="validatePass()">
+
+				<span ng-messages="registerForm.againPass.$error" class="notes">
+					<span ng-message="required">*必填项</span>
+					<br/>
+
+				</span>
+				<span ng-bind="passMessage" class="notes"></span>
+			</div>
+		</div>
+
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" value="remember-me" checked disabled>已阅读并同意</label>
+			<a ui-sref="#"> <font style="color:blue">《HB住房租赁协议》</font>
+			</a>
+		</div>
+
+		<label></label>
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="registerForm.$invalid" >注册<span class="glyphicon glyphicon-hand-right"></span></button>
+	</form>
+
+</div>

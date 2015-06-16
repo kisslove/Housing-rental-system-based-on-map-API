@@ -1,0 +1,139 @@
+<div class="col-md-8 col-md-offset-2 panel panel-default" ng-controller="updateHouseBedCtrl">
+	<h3>--床位出租--</h3>
+	<form class="form-horizontal " role="form" id="bedForm" style="margin-top: 20px;" name="BedForm" ng-submit="updateBed(BedForm.$valid)">
+		<div class="form-group col-md-12">
+			<label  class="col-md-2 control-label">小区名称</label>
+			<div class="col-md-4" ng-class="{'has-error':BedForm.communityName.$dirty&&BedForm.communityName.$invalid}">
+				<input type="text" class="form-control" name="communityName" ng-model="item.communityName" readonly></div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">出租间</label>
+			<div class="col-md-2">
+				<select class="form-control" style="width: 125px" ng-model="item.gender">
+					<option value="">--性别要求--</option>
+					<option>限女生</option>
+					<option>限男生</option>
+					<option>男女不限</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">租金</label>
+			<div class="col-md-2">
+				<select class="form-control" style="width: 125px" ng-model='item.zujinMethod'>
+					<option value="">--租金方式--</option>
+					<option>押一付三</option>
+					<option>押一付二</option>
+					<option>押二付一</option>
+					<option>押二付二</option>
+					<option>押三付三</option>
+				</select>
+			</div>
+			<div class="col-md-2 col-xs-7" ng-class="{'has-error':BedForm.yuezu.$dirty&&BedForm.yuezu.$invalid}">
+				<input type="text" class="form-control col-md-2" style="height: 35px" name="yuezu" ng-model="item.price" required maxlength="10"></div>
+			<label class="col-md-1 col-xs-4 control-label">元/月</label>
+
+		</div>
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">房屋配置</label>
+			<div class="col-md-10">
+				<div class="checkbox col-md-2">
+					<label>
+						<input type="checkbox" ng-model="item.chuang">床</label>
+				</div>
+				<div class="checkbox col-md-2">
+					<label>
+						<input type="checkbox" ng-model="item.yigui">衣柜</label>
+				</div>
+				<div class="checkbox  col-md-2">
+					<label>
+						<input type="checkbox" ng-model="item.shafa">沙发</label>
+				</div>
+				<div class="checkbox  col-md-2">
+					<label>
+						<input type="checkbox" ng-model="item.dianshi">电视</label>
+				</div>
+				<div class="checkbox  col-md-2">
+					<label>
+						<input type="checkbox" ng-model="item.bingxiang">冰箱</label>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<div class="col-md-10 col-md-offset-2">
+				<div class="checkbox col-md-2">
+					<label>
+						<input type="checkbox" ng-model="item.xiyiji">洗衣机</label>
+				</div>
+				<div class="checkbox col-md-2">
+					<label>
+						<input type="checkbox"ng-model="item.kongtiao">空调</label>
+				</div>
+				<div class="checkbox  col-md-2">
+					<label>
+						<input type="checkbox"ng-model="item.reshuiqi">热水器</label>
+				</div>
+				<div class="checkbox  col-md-2">
+					<label>
+						<input type="checkbox"ng-model="item.kuandai">宽带</label>
+				</div>
+				<div class="checkbox  col-md-2">
+					<label>
+						<input type="checkbox"ng-model="item.nuanqi">暖气</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">标题</label>
+			<div class="col-md-5" ng-class="{'has-error':BedForm.title.$dirty&&BedForm.title.$invalid}">
+				<input type="text" class="form-control" placeholder="请输入小于15个汉字" name='title' ng-model='item.title' maxlength="15" required></div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">房间描述</label>
+			<div class="col-md-5" ng-class="{'has-error':BedForm.describle.$dirty&&BedForm.describle.$invalid}">
+				<textarea class="form-control" rows="3" name="describle" ng-model='item.describle' required placeholder="请输入小于100字" maxlength="100"></textarea>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="col-md-offset-2 panel panel-default">
+				<div class="panel-body">
+					<img ng-src="../image/{{img.imageName}}" ng-repeat="img in item.thumbnail" alt="..." style="height: 100px"></div>
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">上传图片</label>
+			<div class="col-md-10">
+				<input type="file" ng-file-select name="item.thumbnail" ng-model="files" multiple="multiple" accept="image/*">
+				<span class="progress" ng-show="progress >= 0">
+					<div ng-class="{progress: true}">
+						<div ng-class="['progress-bar', progress-bar-success]" ng-style="{width: progress + '%'}">
+							<div>{{progress}}%</div>
+						</div>
+					</div>
+				</span>
+				<span ng-show="result">Upload Successful</span>
+				<span ng-show="errorMsg">Upload failed</span>
+			</div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">联系人</label>
+			<div class="col-md-3" ng-class="{'has-error':BedForm.hostname.$dirty&&BedForm.hostname.$invalid}">
+				<input type="text" class="form-control" name='hostname' ng-model='item.hostname' required maxlength="4"></div>
+		</div>
+
+		<div class="form-group col-md-12">
+			<label class="col-md-2 control-label">联系电话</label>
+			<div class="col-md-3" ng-class="{'has-error':BedForm.hostphone.$dirty&&BedForm.hostphone.$invalid}">
+				<input type="tel" class="form-control" placeholder="请输入11位手机号" name="hostphone" ng-model='item.hostphone' maxlength="11" minlength="11" required></div>
+		</div>
+		<div class="form-group col-md-12">
+			<button type="submit" class="btn btn-success  btn-lg col-xs-offset-2 col-md-offset-10" ng-disabled="BedForm.$invalid">确认并提交<span class="glyphicon glyphicon-save"></span></button>
+		</div>
+	</form>
+</div>

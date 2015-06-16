@@ -1,0 +1,150 @@
+<div class="col-xs-8 col-xs-offset-2 panel panel-default container-fluid" style="margin-top: 20px"ng-controller="updateHouseWholeCtrl">
+<h3>--整套出租--</h3>
+	<form class="form-horizontal" role="form" id="wholeForm" style="margin-top: 20px;" name="WholeForm" ng-submit="updateWhole(WholeForm.$valid)" >
+		<div class="form-group col-xs-12">
+			<label  class="col-xs-2 control-label">小区名称</label>
+			<div class="col-xs-4" ng-class="{'has-error':WholeForm.communityName.$dirty&&WholeForm.communityName.$invalid}">
+				<input type="text" class="form-control" name="communityName" ng-model="item.communityName" readonly ></div>
+		</div>
+
+		<div class="form-group col-xs-12">
+			<label class="col-xs-2 control-label">房屋户型</label>
+			<div class="col-xs-10" >
+				<div class="col-xs-1" ng-class="{'has-error':WholeForm.shi.$dirty&&WholeForm.shi.$invalid}">
+					<input type="text" class="form-control col-xs-1" style="width: 35px;height: 30px" name="shi" ng-model="item.shi" required maxlength="1"></div>
+				<label class="col-xs-1 control-label" style="width: 10px;margin-left: 5px">室</label>
+
+				<div class="col-xs-1" ng-class="{'has-error':WholeForm.ting.$dirty&&WholeForm.ting.$invalid}">
+					<input type="text" class="form-control col-xs-1" style="width: 35px;height: 30px" name="ting" ng-model="item.ting" required maxlength="1"></div>
+				<label class="col-xs-1 control-label" style="width: 10px">厅</label>
+
+				<div class="col-xs-1" ng-class="{'has-error':WholeForm.wei.$dirty&&WholeForm.wei.$invalid}">
+					<input type="text" class="form-control col-xs-1" style="width: 35px;height: 30px" name="wei" ng-model="item.wei" required maxlength="1"></div>
+				<label class="col-xs-1 control-label" style="width: 10px">卫</label>
+
+				<div class="col-xs-1" ng-class="{'has-error':WholeForm.pingmi.$dirty&&WholeForm.pingmi.$invalid}">
+					<input type="text" class="form-control col-xs-2" style="width: 80px;height: 30px" name="pingmi" ng-model="item.totalPingmi" required maxlength="7"></div>
+				<label class="col-xs-1 control-label" style="width: 20px;margin-left: 30px">㎡</label>
+			</div>
+		</div>
+        
+        <div class="form-group col-xs-12">
+			<div class="col-xs-2 col-xs-offset-2">
+				<select class="form-control col-xs-2" ng-model="item.houseToward">
+					<option  value="">--朝向--</option>
+					<option>东南</option>
+					<option>西南</option>
+					<option>西北</option>
+					<option>东北</option>
+				</select>
+			</div>
+
+			<div class="col-xs-2">
+				<select class="form-control" style="width: 125px" ng-model="item.decorateSituation">
+					<option value="">--装修情况--</option>
+					<option>毛坯</option>
+					<option>简单装修</option>
+					<option>中等装修</option>
+					<option>精装修</option>
+					<option>豪华装修</option>
+				</select>
+			</div>
+
+			<div class="col-xs-2">
+				<select class="form-control" style="width: 125px" ng-model="item.houseKind">
+				    <option value="">--住宅类型--</option>
+					<option>普通住宅</option>
+					<option>公寓</option>
+					<option>别墅</option>
+					<option>平房</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group col-xs-12">
+			<label class="col-xs-2 control-label">楼层</label>
+			<div class="col-xs-10">
+
+				<label class="col-xs-1 control-label" style="width: 10px">第</label>
+
+				<div class="col-xs-1" ng-class="{'has-error':WholeForm.louceng.$dirty&&WholeForm.louceng.$invalid}">
+					<input type="text" class="form-control col-xs-1" style="width: 42px;height: 30px" name="louceng" ng-model="item.louceng" readonly></div>
+				<label class="col-xs-1 control-label" style="width: 10px">层</label>
+
+				<label class="col-xs-1 control-label" style="width: 10px">共</label>
+
+				<div class="col-xs-1" ng-class="{'has-error':WholeForm.totalLouceng.$dirty&&WholeForm.totalLouceng.$invalid}">
+					<input type="text" class="form-control col-xs-1" style="width: 42px;height: 30px" name="totalLouceng" ng-model="item.totalLouceng" readonly></div>
+				<label class="col-xs-1 control-label" style="width: 10px">层</label>
+
+			</div>
+		</div>
+
+		<div class="form-group col-xs-12">
+			<label class="col-xs-2 control-label">租金</label>
+			<div class="col-xs-2">
+				<select class="form-control" style="width: 125px" ng-model='item.zujinMethod'>
+				    <option value="">--租金方式--</option>
+					<option>押一付三</option>
+					<option>押一付二</option>
+					<option>押二付一</option>
+					<option>押二付二</option>
+					<option>押三付三</option>
+				</select>
+			</div>
+			<div class="col-xs-2" ng-class="{'has-error':WholeForm.yuezu.$dirty&&WholeForm.yuezu.$invalid}">
+				<input type="text" class="form-control col-xs-2" style="height: 35px" name="yuezu" ng-model="item.price" required maxlength="10"></div>
+			<label class="col-xs-1 control-label">元/月</label>
+		</div>
+
+		<div class="form-group col-xs-12">
+			<label class="col-xs-2 control-label">标题</label>
+			<div class="col-xs-5" ng-class="{'has-error':WholeForm.title.$dirty&&WholeForm.title.$invalid}">
+				<input type="text" class="form-control" placeholder="请输入小于15个汉字" name='title' ng-model='item.title' maxlength="15" required></div>
+		</div>
+
+		<div class="form-group col-xs-12">
+			<label class="col-xs-2 control-label">房间描述</label>
+			<div class="col-xs-5" ng-class="{'has-error':WholeForm.describle.$dirty&&WholeForm.describle.$invalid}">
+				<textarea class="form-control" rows="3" name="describle" ng-model='item.describle' required placeholder="请输入小于100字" maxlength="100"></textarea>
+			</div>
+		</div>
+        		<div class="col-xs-12">
+        			 <div class="col-xs-offset-2 panel panel-default">
+        		 	<div class="panel-body">
+        		 		<img ng-src="../image/{{img.imageName}}" ng-repeat="img in item.thumbnail" alt="..." style="height: 100px">
+        		 	</div>
+        		 </div>
+        		</div>
+
+		<div class="form-group col-xs-12">
+			<label class="col-xs-2 control-label">上传图片</label>
+			<div class="col-xs-10">
+				<input type="file" ng-file-select name="thumbnail" ng-model="item.files" multiple="multiple" accept="image/*">		
+				<span class="progress" ng-show="progress >= 0">
+					<div ng-class="{progress: true}">
+						<div ng-class="['progress-bar', progress-bar-success]" ng-style="{width: progress + '%'}">
+							<div>{{progress}}%</div>
+						</div>
+					</div>
+				</span>
+				<span ng-show="result">Upload Successful</span>
+				<span ng-show="errorMsg">Upload failed</span>
+			</div>
+		</div>
+		<div class="form-group col-xs-12">
+			<label class="col-xs-2 control-label">联系人</label>
+			<div class="col-xs-3" ng-class="{'has-error':WholeForm.hostname.$dirty&&WholeForm.hostname.$invalid}">
+				<input type="text" class="form-control" name='hostname' ng-model='item.hostname' required maxlength="4"></div>
+		</div>
+
+		<div class="form-group col-xs-12">
+			<label class="col-xs-2 control-label">联系电话</label>
+			<div class="col-xs-3" ng-class="{'has-error':WholeForm.hostphone.$dirty&&WholeForm.hostphone.$invalid}">
+				<input type="tel" class="form-control" placeholder="请输入11位手机号" name="hostphone" ng-model='item.hostphone' maxlength="11" minlength="11" required></div>
+		</div>
+		<div class="form-group col-xs-12">
+			<button type="submit" class="btn btn-success  btn-lg col-xs-offset-10" >确认并提交<span class="glyphicon glyphicon-save"></span></button>
+		</div>
+	</form>
+</div>

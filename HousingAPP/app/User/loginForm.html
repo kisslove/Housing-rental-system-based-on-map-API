@@ -1,0 +1,29 @@
+<div class="container" ng-controller="userLoginCtrl">
+
+	<div class="row">
+		<form class="form-signin" role="form" ng-submit="login(loginForm.$valid)" name="loginForm">
+		<h2 class="form-signin-heading">请登录</h2>
+		<span ng-bind="message" class="notes"></span>
+		<input type="email" class="form-control" placeholder="邮箱地址" ng-model="user.email" required="" autofocus="" ng-blur="valiRember(user.email)">
+		<label></label>
+		<input type="password" class="form-control" placeholder="密码" ng-model="user.password" required="">
+		<div class="checkbox col-md-12 row">
+			<div class="col-md-4 col-xs-4">
+			<input type="checkbox" value="remember-me" ng-model="rember">
+			<label>记住我</label>
+			</div>
+			<div class="col-md-3  col-xs-3">
+				<a ui-sref="register" style="cursor: pointer;"><font style="color:red">注册</font>
+			</a>
+			</div>
+			<div class="col-md-5 col-xs-5">
+				<a ui-sref="findPass" data-toggle="tooltip" data-placement="left" title="找回密码"><font style="color:blue">忘记密码<span class="glyphicon glyphicon-question-sign"></span></font>
+			</a>
+			</div>
+		</div>
+
+		<button class="btn btn-lg btn-primary btn-block" type="submit">登录<span class="glyphicon glyphicon-hand-up"></span></button>
+	</form>
+	</div>
+
+</div>

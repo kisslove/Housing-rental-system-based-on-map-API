@@ -1,0 +1,39 @@
+<div class="row col-md-12">
+	<div class="thumbnail row col-md-3 col-xs-8" style="height:305px;background: #2CB044;border:3px dotted green;margin:auto" ng-repeat="item in items|filter:query| offset: currentPage*itemsPerPage | limitTo: itemsPerPage">
+		<h4 class="itemRows col-md-12">{{item.title}}</h4>
+		<img href="#" ui-sref="houseDetail({detailPageID:item._id})" ng-src="./image/{{item.thumbnail[0].imageName}}" alt="{{item.label}}" class="col-md-12 my-showList" style="height:150px;cursor:pointer">
+		<div class="caption">
+			<small>{{item.price|currency:"￥"}}</small>
+			<div class="items-details">{{item.describle}}</div>
+			<p class="text-right">
+				<span class="btn btn-primary btn-sm" role="button" ng-click="vm.addToCart(item)" title="比较"> <font size="1px">比较</font>
+				</span>
+				<span ui-sref="houseDetail({detailPageID:item._id})" class="btn btn-warning btn-sm" role="button" title="查看详情">查看详情</span>
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class="row col-md-12">
+	<br><br><br>
+</div>
+<div class="row  col-md-12 col-xs-12 text-center">
+
+	<ul class="pagination" ng-hide='itemData===1' style="background: #2CB044">
+		<li ng-class="firstPageDisabled()">
+			<a href ng-click="firstPage()">首页</a>
+		</li>
+		<li ng-class="prevPageDisabled()">
+			<a href ng-click="prevPage()">« 上一页</a>
+		</li>
+		<li ng-repeat="n in pageNumRange"  ng-class="{active: n.id == currentPage}" ng-click="setPage(n.id)">
+			<a href="#">{{n.id+1}}</a>
+		</li>
+		<li ng-class="nextPageDisabled()">
+			<a href ng-click="nextPage()">下一页 »</a>
+		</li>
+		<li ng-class="lastPageDisabled()">
+			<a href ng-click="lastPage()">末页</a>
+		</li>
+	</ul>
+</div>

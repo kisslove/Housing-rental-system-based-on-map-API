@@ -1,0 +1,120 @@
+<div id="grid"></div>
+<script>
+$(document).ready(function() {
+	$("#grid").kendoGrid({
+		toolbar: "<label>房屋管理</label>",
+		dataSource: {
+			type: "json",
+			transport: {
+				read: {
+					url: HB.dataBaseIp + "/getHouseRentInfo",
+					dataType: 'json',
+					data: {
+						area: function () {
+							return $('#area').val()||'';
+						},
+						city: function() {
+							return $('#city').val()||'';
+						},
+						priceType:function() {
+							return  "";
+						},
+						roomType: function() {
+							return $('#roomType').val()||'';
+						},
+						key: function(){
+							return "";
+						}
+					}
+				},
+				update: {
+					url: HB.dataBaseIp + "/updatePublishHouseInfo",
+					method:'POST',
+					headers: {
+						'my-header': 'my-header-value'
+					},
+					dataType: 'json'
+				},
+				destroy: {
+					url: HB.dataBaseIp + "/removeHouseInfo",
+					dataType: 'json'
+					
+				},
+				parameterMap: function(options, operation) {
+					console.log(kendo.stringify(options));
+					if (operation === "destroy" && options) {
+						 return {HouseID:options._id};
+					}
+					return options;
+				}
+			},
+			schema: {
+                    model: {
+                        id: "_id"
+                    }
+                   },
+			pageSize: 20
+		},
+		refresh:true,
+		height: 350,
+		sortable: true,
+		pageable: {
+			refresh: true,
+			pageSizes: true,
+			buttonCount: 5
+		},
+		filterable: {
+                            extra: false
+                        },
+		columns: [{
+			field: "communityName",
+			title: "小区地址",
+			width: 220
+		}, {
+			field: "rentleType",
+			title: "出租类型",
+			width: 150
+		}, {
+			field: "houseDoorModel",
+			title: "房屋户型",
+			width: 130
+		}, {
+			field: "rentlePrice",
+			title: "出租价格",
+			width: 170
+		}, {
+			field: "floor",
+			title: "楼层",
+			width: 150
+		}, {
+			field: "hostphone",
+			title: "联系电话",
+			width: 150
+		}, {
+			field: "decorateSituation",
+			title: "装修情况",
+			width: 130
+		},{
+			command: [{
+				name: "destroy",
+				text: "删除"
+			}, {
+				text: "详细",
+				click: function(e) {
+				 e.preventDefault();
+                 var tr = $(e.target).closest("tr"); 
+                 var data = this.dataItem(tr);
+                 window.location.href=HB.serverIp+"/HB#/houseDetail/"+data._id;
+                }
+			}
+			],
+			title: "&nbsp;",
+			width: "200px"
+		}
+		],
+		columnMenu: true,
+		editable:"inline"
+	});
+});
+ 
+</script>

@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+	<ul class="nav nav-tabs nav-justified" role="tablist">
+		<li role="presentation" ng-class="{active: Choice == 1}">
+			<a ui-sref="findPassWay({findPassWayId:1})">
+				<span class="glyphicon glyphicon-envelope"></span>
+				邮箱找回
+			</a>
+		</li>
+		<li role="presentation" ng-class="{active: Choice == 2}">
+			<a ui-sref="findPassWay({findPassWayId:2})">
+				<span class="glyphicon glyphicon-question-sign"></span>
+				密保问题
+			</a>
+		</li>
+		<li role="presentation" ng-class="{active: Choice == 3}">
+			<a ui-sref="findPassWay({findPassWayId:3})">
+				<span class="glyphicon glyphicon-user"></span>
+				申述
+			</a>
+		</li>
+	</ul>
+</div>
+<div class="col-md-12" ui-view="findPassword">
+	
+</div>
+	</div>
+</div>

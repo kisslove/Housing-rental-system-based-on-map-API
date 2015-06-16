@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    font-family: Verdana,"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    color: #333333;
+    background-color: #ffffff;
+}
+th.th_center {
+    text-align: center;
+}
+th.widtd_30 {  
+    width:60px;   
+}  
+
+/*top*/
+#scrollTop div{
+    left:0;
+    overflow:hidden;
+    position:absolute;
+    top:0;
+    width:149px;
+    margin:0;
+    padding:0
+}
+#scrollTop .level-2{
+    background:url(../img/rocket_up.png) no-repeat scroll -149px 0 transparent;
+    display:none;
+    height:250px;
+    opacity:0;
+    z-index:1
+}
+#scrollTop .level-3{
+    background:none repeat scroll 0 0 transparent;
+    cursor:pointer;
+    display:block;
+    height:150px;
+    z-index:2
+}
+#scrollTop{
+    background:url(../img/rocket_up.png) no-repeat scroll 0 0 transparent;
+    cursor:default;
+    display:block;
+    height:250px;
+    overflow:hidden;
+    position:fixed;
+    right:0;
+    top:80%;
+    width:149px;
+    z-index:11;
+    margin:-125px 0 0;
+    padding:0
+}
+
+
+img.head { 
+    max-width:20px; /* 最大宽度为500px*/ 
+    width:20px; /* 图片的大小为500px*/ 
+    width:expression(width>20?"20px":width "px");max-width: 20px; /* 假如图片的尺寸超过550象素,那么就按550象素显示,高度同比例变化;假如图片的尺寸小于550象素,那么就原尺寸显示。在IE6中有效*/
+    height:20px;
+    overflow:hidden; /* 超出的部分隐藏，避免控制图片大小失败而引起的撑开变形*/ 
+} 

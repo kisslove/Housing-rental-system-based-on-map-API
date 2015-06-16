@@ -1,0 +1,192 @@
+<div id="usersGrid"></div>
+<div id="sendMessageWin" style="display: none">
+	<table class="table">
+		<tbody>
+			<tr>
+				<td>收信人</td>
+				<td>
+					<input type="text" class="k-textbox" disabled style="background: #EEEEEE" id='userEmail'/>
+				</td>
+			</tr>
+			<tr>
+				<td>内容</td>
+				<td>
+					<textarea id="textareaContent" rows="6" class="k-textbox"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button class="btn btn-danger pull-right" onclick="sendMeassage()">发送</button>
+				</td>
+			</tr>
+			<input type="text" id="userID" style="display: none"></tbody>
+	</table>
+</div>
+<script type="text/x-kendo-template" id="usersDetail">
+                <div>
+                  <div class="col-md-3 col-xs-2">
+                  <img src="./image/#=images[0].imageName#" alt="加载..." class="img-circle" style="height: 100px"></div>
+                  <div class="col-md-3 col-xs-3">
+                       <ul>
+                       	<li><label>家乡:</label>#= hometown #</li>
+                        <li><label>个性签名:</label>#= signature #</li>
+                        <li><label>邮编:</label>#= postcode #</li>
+                       </ul>
+                  </div>
+                </div>
+ </script>
+<script>
+
+	$(document).ready(function() {
+	var usersGrid=$("#usersGrid").kendoGrid({
+			toolbar: "<label>用户管理</label>",
+			dataSource: {
+				type: "json",
+				transport: {
+					read: {
+						url: HB.dataBaseIp + "/getAllUserData",
+						dataType: 'json'
+					},
+					update: {
+						url: HB.dataBaseIp + "/updatePublishHouseInfo",
+						method: 'POST',
+						headers: {
+							'my-header': 'my-header-value'
+						},
+						dataType: 'json'
+					},
+					destroy: {
+						url: HB.dataBaseIp + "/deleteUserData",
+						dataType: 'json'
+
+					},
+					parameterMap: function(options, operation) {
+						console.log(kendo.stringify(options));
+						if (operation === "destroy" && options) {
+							return {
+								UserID: options._id
+							};
+						}
+						return options;
+					}
+				},
+				schema: {
+					model: {
+						id: "_id"
+					}
+				},
+				pageSize: 20
+			},
+			refresh: true,
+			height: 550,
+			sortable: true,
+			pageable: {
+				refresh: true,
+				pageSizes: true,
+				buttonCount: 5
+			},
+			filterable: {
+				extra: false
+			},
+			detailTemplate: kendo.template($("#usersDetail").html()),
+			columns: [{
+				field: "email",
+				title: "登录邮箱",
+				width: 150
+			}, {
+				field: "realname",
+				title: "姓名",
+				width: 150
+			}, {
+				field: "hometown",
+				title: "家乡",
+				width: 150
+			}, {
+				field: "contactAddr",
+				title: "联系地址",
+				width: 150
+			}, {
+				field: "sex",
+				title: "性别",
+				width: 50
+			}, {
+				field: "hostphone",
+				title: "联系电话",
+				width: 150
+			}, {
+				command: [{
+					name: "destroy",
+					text: "删除"
+				}, {
+					text: "详细",
+					click: function(e) {
+						 e.preventDefault();
+                         var tr = $(e.target).closest("tr");
+                          $(tr).find('a')[0].click();
+					}
+				},
+				{
+					text: "发送信息",
+					click: function(e) {
+						 e.preventDefault();
+                         var tr = $(e.target).closest("tr");
+                         var data=this.dataItem(tr);
+                         sendMeassageWin(data);
+
+					}
+				},
+
+				],
+				title: "&nbsp;",
+				width: "200px"
+			}],
+			columnMenu: true,
+			editable: "inline"
+		});
+	});
+   
+    $('#sendMessageWin').kendoWindow({
+    	title:'发送信息',
+    	height:285,
+    	width:300,
+    	resizable:false
+    })
+    function sendMeassageWin(data){
+    	$('#userEmail').val(data.email);
+    	$('#userID').val(data._id);
+         $("#sendMessageWin").data('kendoWindow').center().open();
+    }
+    function sendMeassage() {
+    	if($('#userEmail').val()===""||$('#textareaContent').val()==="")
+          {
+             alert("还未输入信息！")
+          	 return;
+          }
+        $.ajax({
+             type: "POST",
+             url: HB.dataBaseIp+'/sendMessage',
+             data:{
+        	     userID:$('#userID').val(),
+        	     Contents:angular.toJson({
+        			   "content":$('#textareaContent').val(),
+        			   "dateTime":HB.getCurrentTime(),
+        			   "isNew":true
+        			})
+        			
+        	},
+             success: function(data){
+             	       if(data.Message==='success')
+             	       {
+             	       	alert("发送成功！");
+             	       	$('#textareaContent').val('');
+             	       	$("#sendMessageWin").data('kendoWindow').close();
+             	       }
+             	       else{
+             	       	alert("发送失败！");
+             	       }
+                        
+                      }
+
+         });
+    }
+</script>

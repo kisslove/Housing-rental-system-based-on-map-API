@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en" ng-app="routerApp">
+<head>
+    <link rel="icon" href="image/logo.ico" type="image/x-icon">
+	<meta charset="utf-8"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title class="glyphicon glyphicon-home">房屋租赁</title>
+	<!--样式区域-->
+	<link rel="stylesheet" href="framework/bootstrap-3.0.0/css/bootstrap.css">
+	<link rel="stylesheet" href="framework/ng-grid-2.0.12/ng-grid.css">
+	<link rel="stylesheet" href="css/dashboard.css">
+	<link rel="stylesheet" href="css/signIn.css">
+	<link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css">
+	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="css/bootstrap-select.min.css">
+	<link rel="stylesheet" href="framework/kendoui/styles/kendo.common.min.css">
+	<link rel="stylesheet" href="framework/kendoui/styles/kendo.default.min.css">
+	<link rel="stylesheet" href="framework/kendoui/styles/kendo.dataviz.min.css">
+    <link rel="stylesheet" href="framework/kendoui/styles/kendo.dataviz.default.min.css">
+</head>
+
+<body style="opacity: 0.9">
+	<header>
+		<nav class="navbar navbar-inverse" role="navigation" ng-hide="isAdmin==='1'">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header" ng-controller="cityChangeCtrl">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#user-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" ui-sref="home">
+						<span class="glyphicon glyphicon-home"></span>
+						房屋租赁
+					</a>
+					<div class="navbar-brand col-xs-4 col-md-4" style="margin-left: -28px">
+						<select class="" ng-model="vm.value" ng-change="cityChange()">
+							<option value=""> <font size="10px">切换城市</font>
+							</option>
+							<optgroup ng-repeat="province in vm.provinces" label="{{province.label}}">
+								<option ng-repeat="city in province.cities" value="{{city.label}}">{{city.label}}</option>
+							</optgroup>
+						</select>
+					</div>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="user-navbar-collapse-1">
+
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a ui-sref="home">
+								主页
+								<span class="glyphicon glyphicon-home"></span>
+							</a>
+						</li>
+						<li>
+							<a href="{{reg}}">
+								<span ng-bind="register"></span>
+								<span class="badge" ng-bind="messageNum"></span>
+							</a>
+
+						</li>
+						<li>
+							<a href="{{log}}" ng-bind="login"></a>
+						</li>
+						<li class="dropdown">
+							<a ui-sref="#" class="dropdown-toggle" data-toggle="dropdown">
+								我的租赁
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li role="presentation">
+									<a role="menuitem" tabindex="-1" ui-sref="myRentle({myRentleId:0})">
+										<span class="glyphicon glyphicon-home"></span>
+										出租房屋
+									</a>
+								</li>
+								<li role="presentation">
+									<a role="menuitem" tabindex="-1" ui-sref="myRentle({myRentleId:1})">
+										<span class="glyphicon glyphicon-user"></span>
+										个人中心
+									</a>
+								</li>
+								<li role="presentation">
+									<a role="menuitem" tabindex="-1" ui-sref="myRentle({myRentleId:2})">
+										<span class="glyphicon glyphicon-envelope"></span>
+										信息中心
+									</a>
+								</li>
+								<li role="presentation">
+									<a role="menuitem" tabindex="-1" ui-sref="myRentle({myRentleId:3})">
+										<span class="glyphicon glyphicon-headphones"></span>
+										娱乐服务
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div ng-controller="roomRecommendCtrl" ng-hide="isAdmin==='1'">
+		<div  ng-show="showHouseRecommend===1&&recomItem.length>0" class="my-hidden-xs" 
+		style="position:fixed;top:100px;right:35px;width:110px;z-index: 9999;border: 1px solid green">
+			<div class="panel-danger" ng-cloak>
+				<div class="panel-heading" style="width:110px">
+					房屋推荐
+					<span class="glyphicon glyphicon-remove" ng-click="hiddenProl()" style="cursor:pointer"></span>
+				</div>
+				<div class="panel-body" ng-repeat="item in recomItem">
+					<div ui-sref="houseDetail({detailPageID:item._id})" style="cursor:pointer">
+						<div>
+							<img ng-src="image/{{item.thumbnail[0].imageName}}" class="img-thumbnail" style="" alt="加载中"></div>
+						<div>
+							<h5>{{item.rentleType}}(￥{{item.price}})</h5>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ui-view>
+		
+	</div>
+
+	<a id="up" href="javascript:;" class="up"></a>
+	<!--脚本区域-->
+	<script src="framework/jquery-1.9.1.js"></script>
+	<!--文件上传及angularjs-->
+	<script src="framework/angular-file-upload-shim.min.js"></script>
+	<script src="framework/angular-1.3.0.14/angular.js"></script>
+	<script src="framework/angular-file-upload.js"></script>
+	<!--动画-->
+	<script src="framework/angular-1.3.0.14/angular-animate.min.js"></script>
+	<script src="framework/angular-1.3.0.14/angular-messages.min.js"></script>
+	<!--路由-->
+	<script src="framework/angular-ui-router.js"></script>
+	<!--bootstrap-->
+	<script src="framework/ui-bootstrap-tpls-0.11.0.js"></script>
+	<script src="framework/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+	<!--头部向上隐藏-->
+	<script src="framework/headerRooms.js"></script>
+	<!--存储cookie-->
+	<script src="framework/angular-1.3.0.14/angular-cookies.min.js"></script>
+
+	<script src="framework/bootstrap-select.min.js"></script>
+	<!--kendo UI-->
+	
+	<script src="framework/kendoui/kendo.all.min.js"></script>
+	<!--内部js-->
+	<script src="js/config.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/animations.js"></script>
+	<script src="js/controllers.js"></script>
+	<script src="js/filters.js"></script>
+	<script src="js/services.js"></script>
+	<script type="text/javascript">
+        //绑定页面滚动事件
+        $(window).bind('scroll',function(){
+            var len=$(this).scrollTop()
+            if(len>=100){
+                //显示回到顶部按钮
+                $('#up').show();
+            }else{
+                //影藏回到顶部按钮
+                $('#up').hide();
+            }
+        })
+        //绑定回到顶部按钮的点击事件
+        $('#up').click(function(){
+            //动画效果，平滑滚动回到顶部
+            //$(document).animate({ scrollTop: 0 });
+            //不需要动画则直接
+            $(document).scrollTop(0);
+        })
+    </script>
+
+	<script type="text/javascript">
+// 获取页面元素
+var myElement = document.querySelector("header");
+// 创建 Headroom 对象，将页面元素传递进去
+var headroom = new Headroom(myElement, {
+"tolerance": 5,
+"offset": 205,
+"classes": {
+"initial": "animated",
+"pinned": "slideDown",
+"unpinned": "slideUp"
+}
+});
+// 初始化
+headroom.init(); 
+</script>
+	<!--获取用户IP地址
+	<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>-->
+	<!--console.log(returnCitySN["cip"]+','+returnCitySN["cname"])  ;-->
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=E1YbVFg2KPSaKPgUgtz3syD4" ></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js" ></script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<div class="col-md-8 col-md-offset-2 col-xs-12" style="margin-top: 20px" ng-controller="findPassByEmailCtrl">
+		<div class="col-md-12">
+		<div class="col-md-12">
+			<label class="form-label">发送信息到注册邮箱</label>
+		</div>
+		<div class="col-md-12 col-xs-12">
+			<h3>请输入用户名：</h3>
+		</div>
+		<div class="col-md-8 col-md-offset-3">
+			<input type="email" class="form-control" placeholder="注册邮箱" ng-model="user.username">
+			<span class="notes" ng-bind="errorMsg" ng-show="errorMsg!=''"></span>
+			</div>
+
+		<div class="col-md-3 col-md-offset-9 col-xs-12" style="margin-top: 20px">
+			<button class="btn btn-md btn-success" ng-click="checkUsername(user.username)">
+				发送
+				<span class="glyphicon glyphicon-forward"></span>
+			</button>
+		</div>
+	</div>
+</div>
